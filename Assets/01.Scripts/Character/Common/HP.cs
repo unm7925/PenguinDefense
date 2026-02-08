@@ -30,4 +30,21 @@ public class HP:MonoBehaviour,IRecoverable
     {
         Heal(amount);
     }
+
+    public void TakeDamage(int amount)
+    {
+        hp -= amount;
+        if (hp <= 0)
+        {
+            hp = 0;
+            Invoke("Die",3);;
+        }
+        
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+    
 }

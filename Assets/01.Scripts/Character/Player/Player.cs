@@ -1,8 +1,14 @@
 
+using System;
+using System.Transactions;
+using UnityEngine;
+
 public class Player : Character
 {
     
     private MP _mp;
+
+    
     
     //[SerializeField] private WeaponData;
 
@@ -11,6 +17,7 @@ public class Player : Character
         _mp = GetComponent<MP>();
     }
 
+    
     // Update is called once per frame
     
 }

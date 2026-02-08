@@ -22,6 +22,6 @@ public class EnemyMovement:MonoBehaviour
     }
     private void Move()
     {
-        rb2D.linearVelocityY -= speed*Time.fixedDeltaTime;
+        rb2D.linearVelocityY = -speed  * Time.fixedDeltaTime;
     }
 }
