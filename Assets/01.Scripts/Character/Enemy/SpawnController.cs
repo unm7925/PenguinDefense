@@ -3,15 +3,23 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SpawnEnemy:MonoBehaviour
+public class SpawnController:MonoBehaviour
 {
-        [SerializeField] private GameObject spawnPrefab;
+        [SerializeField] private Enemy spawnPrefab;
         [SerializeField] private int spawnAmount;
         [SerializeField] private float cooldown = 3f;
+        
+        
+        [SerializeField] private StageManager stageManager;
 
         private bool isSpawning = false;
         private int counting = 0;
         private Vector2 spawnSize = new Vector2(2f,12f);
+
+        private void Awake()
+        {
+                
+        }
 
         public void Init()
         {
@@ -26,11 +34,14 @@ public class SpawnEnemy:MonoBehaviour
                 }
         }
 
-        private IEnumerator Spawn(GameObject prefab)
+        private IEnumerator Spawn(Enemy prefab)
         {
                 isSpawning = true;
                 Vector2 pos = new Vector2(Random.Range(-spawnSize.x,spawnSize.x),spawnSize.y);
-                Instantiate(spawnPrefab, pos, Quaternion.identity);
+                Enemy enemy = Instantiate(spawnPrefab, pos, Quaternion.identity).GetComponent<Enemy>();
+
+                enemy.OnDead += stageManager.ReturnEXP; 
+                
                 counting++;
                 yield return new WaitForSeconds(cooldown);
                 

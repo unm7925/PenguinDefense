@@ -9,6 +9,8 @@ public class HP:MonoBehaviour,IRecoverable
     
     [SerializeField]private int maxHP;
 
+    public event Action OnDeath;
+    
     public void Init()
     {
         //maxHP = 
@@ -37,14 +39,14 @@ public class HP:MonoBehaviour,IRecoverable
         if (hp <= 0)
         {
             hp = 0;
-            Invoke("Die",3);;
+            Die();
         }
         
     }
 
     private void Die()
     {
-        Destroy(gameObject);
+        OnDeath?.Invoke();
     }
     
 }
