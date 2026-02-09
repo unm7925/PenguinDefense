@@ -3,7 +3,7 @@
 public class PlayerAttack:MonoBehaviour
 {
     [SerializeField] private GameObject weapon;
-    private float speed = 5;
+    private float speed = 50;
     private float cooldown = 3;
     private float timer = 0f;
     private void FixedUpdate()
