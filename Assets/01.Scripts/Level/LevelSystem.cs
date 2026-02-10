@@ -1,38 +1,28 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class LevelSystem:MonoBehaviour
 {
         private EXPSystem expSystem;
-        [SerializeField] private TextMeshProUGUI levelText;
+        [SerializeField] private LevelUpUI levelUpUI;
+        
         
         private void Awake()
         {
                 expSystem = GetComponent<EXPSystem>();
         }
         
-
-        private void printSelectUI()
-        {
-                levelText.gameObject.SetActive(true);
-                
-        }
-
-        private void LevelUpEffect()
-        {
-                
-        }
-        
         private void OnEnable()
         {
-                expSystem.OnLevelUp += printSelectUI;
-                expSystem.OnLevelUp += LevelUpEffect;
+                expSystem.OnLevelUp += levelUpUI.Play;
+                
         }
 
         private void OnDisable()
         {
-                expSystem.OnLevelUp -= printSelectUI;
-                expSystem.OnLevelUp -= LevelUpEffect;
+                expSystem.OnLevelUp -= levelUpUI.Play;
+                
         }
 }
