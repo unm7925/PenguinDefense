@@ -9,20 +9,19 @@ public class StageManager:MonoBehaviour
     [SerializeField] private EXPSystem expSystem;
     
     private List<WaveData> waveDatas; 
+    
+    public event Action OnStageCleared;
         
     private float waveDeley = 10f;
     
-    private int waveIndex = 0;
+    private int waveIndex;
 
     private bool isStageCleared = false;
-    private void Awake()
+
+    private void LoadStage(int _stageIndex)
     {
         
-    }
-
-    public void LoadStage(StageData stageData)
-    {
-        waveDatas = stageData.waves;
+        waveDatas = GameManager.Instance.AllStages[_stageIndex].waves;
         waveIndex = 0;
 
         StartWave(waveIndex);
@@ -30,6 +29,7 @@ public class StageManager:MonoBehaviour
 
     private void Start()
     {
+        LoadStage(GameManager.Instance.CurrentStageIndex);
         spawnController.OnEnemySpawned += OnEnemySpawned;
         spawnController.OnSpawnComplete += HandleSpawnCompleted;
     }
@@ -101,9 +101,10 @@ public class StageManager:MonoBehaviour
         if (isStageCleared) return;
         isStageCleared = true;
         
-        StopAllCoroutines();
-        Time.timeScale = 0;
+        Debug.Log("Clear");
         
+        StopAllCoroutines();
+        OnStageCleared?.Invoke();
         
         // 스테이지 클리어 -> 이벤트 구독한 ui 다 튀어나오기 
     }

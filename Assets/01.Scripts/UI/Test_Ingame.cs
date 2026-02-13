@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Test_Ingame : MonoBehaviour
 {
+    [SerializeField] private GameObject StagesPanel;
     public void OnClick()
     {
-        SceneManager.LoadScene(1);
+           StagesPanel.SetActive(!StagesPanel.activeSelf);
     }
-    
 }

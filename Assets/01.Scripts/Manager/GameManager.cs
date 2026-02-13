@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private TargetSystem targetSystem;
-    [SerializeField] private StageManager stageManager;
-    public TargetSystem TargetSystem => targetSystem;
+    public List<StageData> AllStages;
+    public TargetSystem targetSystem;
+    public int CurrentStageIndex;
 
     public static GameManager Instance;
     private void Awake() 
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -23,5 +25,8 @@ public class GameManager : MonoBehaviour
 
     }
 
- 
+    private void Start()
+    {
+        targetSystem = GetComponent<TargetSystem>();
+    }
 }

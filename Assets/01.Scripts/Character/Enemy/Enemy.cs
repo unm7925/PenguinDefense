@@ -32,13 +32,13 @@ public class Enemy : Character
 
     private void OnEnable()
     {
-        GameManager.Instance.TargetSystem.Register(this);
+        GameManager.Instance.targetSystem.Register(this);
         _hp.OnDeath += HandleDeath;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.TargetSystem.Unregister(this);
+        GameManager.Instance.targetSystem.Unregister(this);
         _hp.OnDeath -= HandleDeath; // 파괴되면 어차피 사라지지만 일단 그냥 
     }
 

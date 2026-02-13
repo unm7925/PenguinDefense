@@ -22,7 +22,7 @@ public class PlayerAttack:MonoBehaviour
         if (timer < cooldown) return;
         
         
-        Enemy target = GameManager.Instance.TargetSystem.GetClosesTarget(transform.position);
+        Enemy target = GameManager.Instance.targetSystem.GetClosesTarget(transform.position);
         if (target == null) return;
         
         Throw(target.transform.position);

@@ -13,13 +13,9 @@ MonoBehaviour:
   m_Name: WaveData_1
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   enemies:
-  - prefab: {fileID: 8031582740323571236, guid: 44002d2d3df05cf4aafdfad743ee6d60, type: 3}
-    count: 5
-    spawnInterval: 1
-    enemyHpMultiplier: 1
-    enemySpeedMultiplier: 1
-  - prefab: {fileID: 8031582740323571236, guid: 44002d2d3df05cf4aafdfad743ee6d60, type: 3}
-    count: 10
+  - isBoss: 0
+    prefab: {fileID: 8031582740323571236, guid: 44002d2d3df05cf4aafdfad743ee6d60, type: 3}
+    count: 1
     spawnInterval: 1
     enemyHpMultiplier: 1
     enemySpeedMultiplier: 1
