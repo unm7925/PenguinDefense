@@ -1,52 +1,62 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpawnController:MonoBehaviour
 {
-        [SerializeField] private Enemy spawnPrefab;
-        [SerializeField] private int spawnAmount;
         [SerializeField] private float cooldown = 3f;
         
+        public event Action<Enemy> OnEnemySpawned;
+        public event Action OnSpawnComplete;
         
-        [SerializeField] private StageManager stageManager;
-
-        private bool isSpawning = false;
-        private int counting = 0;
         private Vector2 spawnSize = new Vector2(2f,12f);
 
-        private void Awake()
-        {
-                
-        }
 
         public void Init()
         {
                 
         }
+        
 
-        private void Update()
+        public void StartSpawn(WaveData _waveData)
+        { 
+                StartCoroutine(Spawn(_waveData));
+        }
+        
+
+        private IEnumerator Spawn(WaveData _waveData)
         {
-                if(counting < spawnAmount && !isSpawning)
+                
+                foreach (var t in _waveData.enemies)
                 {
-                        StartCoroutine(Spawn(spawnPrefab));
+                        for(int j=0; j<t.count;j++)
+                        {
+                                
+                                Vector2 pos = RandomPos();
+                                
+                                Enemy enemy = Instantiate(t.prefab, pos,
+                                                Quaternion.identity)
+                                        .GetComponent<Enemy>();
+                                
+                                enemy.Init(t.isBoss);
+                                
+                                OnEnemySpawned?.Invoke(enemy);
+                                
+                                yield return new WaitForSeconds(cooldown);
+                        }
                 }
+
+                OnSpawnComplete?.Invoke();
         }
 
-        private IEnumerator Spawn(Enemy prefab)
+        private Vector2 RandomPos()
         {
-                isSpawning = true;
                 Vector2 pos = new Vector2(Random.Range(-spawnSize.x,spawnSize.x),spawnSize.y);
-                Enemy enemy = Instantiate(spawnPrefab, pos, Quaternion.identity).GetComponent<Enemy>();
-
-                enemy.OnDead += stageManager.ReturnEXP; 
-                
-                counting++;
-                yield return new WaitForSeconds(cooldown);
-                
-                yield return isSpawning = false;
+                return pos;
         }
+        
         
         
 }

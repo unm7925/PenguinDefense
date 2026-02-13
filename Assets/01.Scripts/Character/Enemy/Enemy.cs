@@ -7,7 +7,14 @@ public class Enemy : Character
     private EnemyMovement _movement;
     private float expAmount = 60f;
     
-    public Action<float> OnDead;
+    public Action<Enemy,float> OnDead;
+    
+    public bool IsBoss {get; private set;}
+
+    public void Init(bool isBoss)
+    {
+        IsBoss = isBoss;
+    }
 
     private void Awake()
     {
@@ -37,7 +44,7 @@ public class Enemy : Character
 
     private void HandleDeath()
     {
-        OnDead?.Invoke(expAmount);
+        OnDead?.Invoke(this,expAmount);
         
         Destroy(gameObject);
     }

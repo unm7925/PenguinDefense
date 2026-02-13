@@ -285,9 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2600f7df1c204a69b95cdfe30bda2a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnEnemy
-  spawnPrefab: {fileID: 8031582740323571236, guid: 44002d2d3df05cf4aafdfad743ee6d60, type: 3}
-  spawnAmount: 10
   cooldown: 1
+  waveDatas:
+  - {fileID: 11400000, guid: f1df83ccc33243244bc67e59837864c9, type: 2}
   stageManager: {fileID: 719777234}
 --- !u!4 &404499004
 Transform:
@@ -554,6 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99dbfdb19914d06862c37966efec6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
+  spawnController: {fileID: 404499003}
   expSystem: {fileID: 1367954461}
 --- !u!4 &719777235
 Transform:

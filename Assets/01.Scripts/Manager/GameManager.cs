@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TargetSystem targetSystem;
+    [SerializeField] private StageManager stageManager;
     public TargetSystem TargetSystem => targetSystem;
 
     public static GameManager Instance;
@@ -20,4 +22,6 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 120;
 
     }
+
+ 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerAttack:MonoBehaviour
 {
     [SerializeField] private GameObject weapon;
-    private float speed = 200;
+    private float speed = 500;
     private float cooldown = 3;
     private float timer = 0f;
     
