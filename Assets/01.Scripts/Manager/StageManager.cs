@@ -30,7 +30,7 @@ public class StageManager:MonoBehaviour
     private void Start()
     {
         LoadStage(GameManager.Instance.CurrentStageIndex);
-        spawnController.OnEnemySpawned += OnEnemySpawned;
+        spawnController.OnEnemySpawn += OnEnemySpawn;
         spawnController.OnSpawnComplete += HandleSpawnCompleted;
     }
 
@@ -43,10 +43,9 @@ public class StageManager:MonoBehaviour
         spawnController.StartSpawn(waveDatas[_waveIndex]);
     }
     
-    private void OnEnemySpawned(Enemy _enemy)
+    private void OnEnemySpawn(Enemy _enemy)
     {
         _enemy.OnDead += OnEnemyDead;
-        
     }
     
     private void OnEnemyDead(Enemy enemy,float _amount)
@@ -111,7 +110,7 @@ public class StageManager:MonoBehaviour
 
     private void OnDestroy()
     {
-        spawnController.OnEnemySpawned -= OnEnemySpawned;
+        spawnController.OnEnemySpawn -= OnEnemySpawn;
         spawnController.OnSpawnComplete -= HandleSpawnCompleted;
     }
 }

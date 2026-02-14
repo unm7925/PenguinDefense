@@ -7,13 +7,12 @@ using Random = UnityEngine.Random;
 public class SpawnController:MonoBehaviour
 {
         [SerializeField] private float cooldown = 3f;
+        [SerializeField] private TargetSystem targetSystem;
         
-        public event Action<Enemy> OnEnemySpawned;
+        public event Action<Enemy> OnEnemySpawn;
         public event Action OnSpawnComplete;
         
         private Vector2 spawnSize = new Vector2(2f,12f);
-
-
         public void Init()
         {
                 
@@ -41,8 +40,12 @@ public class SpawnController:MonoBehaviour
                                         .GetComponent<Enemy>();
                                 
                                 enemy.Init(t.isBoss);
+
+                                enemy.SetTargetSystem(targetSystem);
                                 
-                                OnEnemySpawned?.Invoke(enemy);
+                                targetSystem.Register(enemy);
+                                
+                                OnEnemySpawn?.Invoke(enemy);
                                 
                                 yield return new WaitForSeconds(cooldown);
                         }

@@ -2,8 +2,10 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : Character
+public class Enemy : GameObject
 {
+    private TargetSystem targetSystem;
+    
     private EnemyMovement _movement;
     private float expAmount = 60f;
     
@@ -30,15 +32,20 @@ public class Enemy : Character
     }
     // [SerializeField] private EnemyData _enemyData;
 
+    public void SetTargetSystem(TargetSystem _targetSystem)
+    {
+        targetSystem = _targetSystem;
+    }
+
     private void OnEnable()
     {
-        GameManager.Instance.targetSystem.Register(this);
         _hp.OnDeath += HandleDeath;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.targetSystem.Unregister(this);
+        if (targetSystem == null) return;
+        targetSystem.Unregister(this);
         _hp.OnDeath -= HandleDeath; // 파괴되면 어차피 사라지지만 일단 그냥 
     }
 

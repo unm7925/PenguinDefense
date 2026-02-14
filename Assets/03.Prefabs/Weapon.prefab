@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3780838500607756737}
   - component: {fileID: 1987952443290135714}
   - component: {fileID: 1856812589979512142}
-  - component: {fileID: 9090661889316096457}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -167,16 +166,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &9090661889316096457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850599013869636185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a811a584fd9e459f9a7fa5ec7495dd05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  damage: 114

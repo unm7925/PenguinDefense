@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public List<StageData> AllStages;
-    public TargetSystem targetSystem;
     public int CurrentStageIndex;
 
     public static GameManager Instance;
@@ -27,6 +26,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        targetSystem = GetComponent<TargetSystem>();
+        CurrentStageIndex = 0;
     }
 }
