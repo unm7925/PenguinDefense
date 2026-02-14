@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff02ef0eed0d5b4981dd9f8dc3a5fd8, type: 3}
   m_Name: test1 1
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
-  enemies: []
+  enemies:
+  - isBoss: 0
+    prefab: {fileID: 8031582740323571236, guid: 44002d2d3df05cf4aafdfad743ee6d60, type: 3}
+    count: 100
+    spawnInterval: 0
+    enemyHpMultiplier: 0
+    enemySpeedMultiplier: 0

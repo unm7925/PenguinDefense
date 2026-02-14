@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7faa6cbf6304f2ca453dec05ee91330, type: 3}
-  m_Name: WeaponData
+  m_Name: Shuriken_Data
   m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
-  weaponPrefab: {fileID: 0}
-  waeponName: 
-  damage: 0
-  searchRange: 0
-  baseCooldown: 0
+  weaponPrefab: {fileID: 8971791327109278964, guid: bf930c6079327e242ba07e88114403a9, type: 3}
+  waeponName: shruiken
+  damage: 100
+  searchRange: 100
+  baseCooldown: 3
   projectile:
-    projectilePrefab: {fileID: 0}
-    speed: 0
-    lifetime: 0
+    speed: 15
+    lifetime: 100
     count: 0
     spreadAngle: 0
   bounce:

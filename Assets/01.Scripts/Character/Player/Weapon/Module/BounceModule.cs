@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-    public class BounceModule
-    {
-        public int bounceCount;
-    }
+public class BounceModule
+{ 
+    public int bounceCount;
+}

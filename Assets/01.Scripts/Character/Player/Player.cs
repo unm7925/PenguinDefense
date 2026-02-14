@@ -3,7 +3,7 @@ using System;
 using System.Transactions;
 using UnityEngine;
 
-public class Player : GameObject
+public class Player : Creature
 {
     
     private MP _mp;
@@ -15,7 +15,7 @@ public class Player : GameObject
     
     //[SerializeField] private WeaponData;
 
-    private void Awake()
+    protected override void Awake()
     {
         
         expSystem = GetComponent<EXPSystem>();

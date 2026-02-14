@@ -1,32 +1,56 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelUpPanel:MonoBehaviour
 {
-        [SerializeField] private UnityEngine.GameObject panel;
-        [SerializeField] private UnityEngine.GameObject button;
+    [SerializeField] private WeaponContainer weaponContainer;
+    [SerializeField] private AllWeaponData allWeaponData;
+    [SerializeField] private GameObject panel;
+    [SerializeField] private Button slot1, slot2;
+    [SerializeField] private TextMeshProUGUI slot1Txt , slot2Txt;
+
+    private BaseWeaponData[] selectedWeapons = new BaseWeaponData[2];
         
-        private void Show(List<BaseWeaponData> candidates)
+        public void Show()
         {
+            Time.timeScale = 0f;
                 panel.SetActive(true);
-                // 이놈도 레벨업에 구독해야할듯? 
+                GetRandomWeapons();
+                slot1Txt.text = selectedWeapons[0].name;
+                slot2Txt.text = selectedWeapons[1].name;
                 
-                // 데이터 전달인거면 슬롯 <- 이라는 스크립트 이미 생성해서 거기에 load해서 data 넣어야할듯.
-                // 버튼 눌러지면 그 슬롯에서 웨폰 컨테이너로 -> 데이터 전송 하는 식 인듯?
-                // 게임 멈춤을 여기서 해야하나? 흠.. 아닌거같은데 맞나? 잘모르겠음 ㅇㅇ
+                slot1.onClick.RemoveAllListeners();
+                slot2.onClick.RemoveAllListeners();
+                slot1.onClick.AddListener(() => OnSelectWeapon(0));
+                slot2.onClick.AddListener(()=> OnSelectWeapon(1));
+        }
+        private void OnSelectWeapon(int _index)
+        {
+            weaponContainer.AddWeapon(selectedWeapons[_index]);
+            Hide();
+        }
+        private void GetRandomWeapons()
+        {
+            List<BaseWeaponData> temp = new List<BaseWeaponData>(allWeaponData.allWeapons);
+
+            for (int i = temp.Count - 1; i >= 0; i--) 
+            {
+                int j = Random.Range(0, i+1);
+                (temp[i], temp[j]) = (temp[j], temp[i]);
+            }
+            
+            selectedWeapons[0] = temp[0];
+            selectedWeapons[1] = temp[1];
         }
 
         private void Hide()
         {
+            Time.timeScale = 1f;
             panel.SetActive(false);
-            // 
-            // 버튼 눌러지면 Hide 그러니까 이벤트 구독 형식인듯? 슬롯에서 OnClick <- 이벤트 만들고 이걸 거기에 구독해야할것같음.
         }
-
-        private void GenerateCandidates()
-        {
-            // 전체 무기 리스트.. 에서 그럼 이놈이 무기 리스트를 다 둘러봐야하는거 아닌가? 최대레벨도 .. 베이스 웨폰 데이터에 넣어놔야겠네
-            // 데이터 들 중 랜덤으로 3개, <- 중복해도 상관없음 아무튼 전달. random 쓰면 될 듯 그냥?
-        }
-        
+    
 }

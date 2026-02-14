@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-    public class PierceModule
-    {
-        public int pierceCount;
-    }
+public class PierceModule
+{ 
+    public int pierceCount;
+}

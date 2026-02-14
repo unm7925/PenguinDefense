@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class GameObject : MonoBehaviour
+public class Creature : MonoBehaviour
 {
     protected HP _hp;
 
     [SerializeField] protected  int normalDamage;
     
-    protected void Awake()
+    protected virtual void Awake()
     {
         _hp = GetComponent<HP>();
     }

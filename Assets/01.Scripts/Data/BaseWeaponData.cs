@@ -1,11 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponData", menuName = "Scriptable Objects/WeaponData")]
+[CreateAssetMenu(fileName = "BaseWeaponData", menuName = "Scriptable Objects/WeaponData")]
 public class BaseWeaponData : ScriptableObject
 {
     public GameObject weaponPrefab;
     public string waeponName;
-    public float damage;
+    public int damage;
     public float searchRange;
     public float baseCooldown;
     

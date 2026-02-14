@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : GameObject
+public class Enemy : Creature
 {
     private TargetSystem targetSystem;
     
@@ -18,7 +18,7 @@ public class Enemy : GameObject
         IsBoss = isBoss;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         _movement = GetComponent<EnemyMovement>();
