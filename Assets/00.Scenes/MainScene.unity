@@ -1676,9 +1676,10 @@ GameObject:
   - component: {fileID: 1157326941}
   - component: {fileID: 1157326940}
   - component: {fileID: 1157326939}
+  - component: {fileID: 1157326943}
   m_Layer: 0
   m_Name: Life
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1695,7 +1696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4c622d38a94550a6fc193e2f398318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP
-  maxHP: 100
 --- !u!61 &1157326940
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1816,6 +1816,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157326943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157326938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f54cb5a7b153d142bf0bac8b06d40c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Wall
+  maxHP: 1000
 --- !u!1 &1232624900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,11 +1955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9933e2795982c64c81b637101a06f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EXPSystem
---- !u!4 &1367954467 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8589287193946477853, guid: 83895a5c596873542b5a3adf9366ce0c, type: 3}
-  m_PrefabInstance: {fileID: 1997178889131366667}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1407254063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2853,18 +2861,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4632279554819010301, guid: 83895a5c596873542b5a3adf9366ce0c, type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 11400000, guid: da2a062d8f3c32a4e9fbf616bc84d451, type: 2}
     - target: {fileID: 7670924391652027785, guid: 83895a5c596873542b5a3adf9366ce0c, type: 3}
       propertyPath: targetSystem
       value: 
       objectReference: {fileID: 1722251263}
-    - target: {fileID: 7670924391652027785, guid: 83895a5c596873542b5a3adf9366ce0c, type: 3}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 1367954467}
     - target: {fileID: 8589287193946477853, guid: 83895a5c596873542b5a3adf9366ce0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponContainer
   targetSystem: {fileID: 0}
-  parent: {fileID: 8589287193946477853}
+  playerTransform: {fileID: 8589287193946477853}
 --- !u!1 &1339487483030159835
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,9 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9108aabec966f0e4981bc0ec25ba7c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  normalDamage: 0
   weaponContainer: {fileID: 7670924391652027785}
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: da2a062d8f3c32a4e9fbf616bc84d451, type: 2}
 --- !u!114 &4084027822869454495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelSystem
   levelUpUI: {fileID: 0}
+  levelUpPanel: {fileID: 0}
 --- !u!95 &4794610765676890947
 Animator:
   serializedVersion: 7

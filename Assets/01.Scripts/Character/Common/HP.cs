@@ -5,26 +5,27 @@ public class HP:MonoBehaviour,IRecoverable
 {
     [Header("HP")]
     
-    private int hp;
+    private int currentHP;
     
-    [SerializeField]private int maxHP;
+    private int maxHP;
 
     public event Action OnDeath;
     
-    public void Init()
+    public void Init(int _maxHP)
     {
         //maxHP = 
-        hp = maxHP;
+        maxHP = _maxHP;
+        currentHP = maxHP;
     }
 
     public int CurrentHp()
     {
-        return hp;
+        return currentHP;
     }
 
     private void Heal(int _hp)
     {
-        hp = Mathf.Min(hp + _hp, maxHP);
+        currentHP = Mathf.Min(currentHP + _hp, maxHP);
     }
 
 
@@ -35,10 +36,10 @@ public class HP:MonoBehaviour,IRecoverable
 
     public void TakeDamage(int amount)
     {
-        hp -= amount;
-        if (hp <= 0)
+        currentHP -= amount;
+        if (currentHP <= 0)
         {
-            hp = 0;
+            currentHP = 0;
             Die();
         }
         

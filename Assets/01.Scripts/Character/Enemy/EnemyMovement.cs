@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyMovement:MonoBehaviour
 {
-    [SerializeField] private float speed;
+    private float speed;
 
     private Rigidbody2D rb2D;
     private void Awake()
@@ -11,14 +11,14 @@ public class EnemyMovement:MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>(); 
     }
 
-    public void Init() // <- float _speed; 
-    { 
-
+    public void Init(float _speed)
+    {
+        speed = -_speed;
     }
 
     public void Move()
     {
-        rb2D.linearVelocityY = -speed  * Time.fixedDeltaTime;
+        rb2D.linearVelocityY = speed  * Time.fixedDeltaTime;
     }
 
     public void Stop()

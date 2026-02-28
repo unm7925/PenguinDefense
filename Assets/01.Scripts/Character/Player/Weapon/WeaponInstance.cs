@@ -8,6 +8,9 @@ public class WeaponInstance
         int maxLevel = 6;
         private float speed;
         private float spreadAngle;
+        
+        // hard
+        private string targetTag = "Enemy";
 
         public WeaponInstance(BaseWeaponData _data)
         {
@@ -70,7 +73,7 @@ public class WeaponInstance
                 Projectile projectile = weapon.GetComponent<Projectile>();
                 if (projectile != null)
                 { 
-                        projectile.Init(data.damage, data.projectile.lifetime);
+                        projectile.Init(data.damage, data.projectile.lifetime,targetTag);
                 }
                 
                 Rigidbody2D rb2 = weapon.GetComponent<Rigidbody2D>();

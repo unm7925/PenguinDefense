@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2343094194555707843}
   - component: {fileID: 4029096213168436000}
   - component: {fileID: -592458481974840226}
+  - component: {fileID: -6006428685626174550}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -108,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50dc02b8895455f95fccd24f2f98521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  normalDamage: 0
+  enemyData: {fileID: 11400000, guid: 81b5aee2d846f784a9bc3369af345e68, type: 2}
 --- !u!114 &8482243373912954949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd04a9e832ca4fb1b01322c0b994b583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  speed: 29.9
 --- !u!50 &2343094194555707843
 Rigidbody2D:
   serializedVersion: 5
@@ -161,7 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4c622d38a94550a6fc193e2f398318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP
-  maxHP: 100
 --- !u!61 &-592458481974840226
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -192,7 +191,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -208,3 +207,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-6006428685626174550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023768008149076233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d1f1a5682147cb86553fdff2d3598f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  IsAttacking: 0

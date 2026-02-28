@@ -1,14 +1,17 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private EnemyStateMachine stateMachine;
+    [SerializeField] private EnemyData enemyData;
     
-    public EnemyIdleState idleState;
-    public EnemyMoveState moveState;
-    public EnemyAttackState attackState;
+    
+    
+    private EnemyStateMachine stateMachine;
+
+    private EnemyIdleState idleState;
+    private EnemyMoveState moveState;
+    private EnemyAttackState attackState;
 
     private EnemyAttack enemyAttack;
     
@@ -18,7 +21,7 @@ public class Enemy : MonoBehaviour
     
     private EnemyMovement enemyMovement;
     
-    private float expAmount = 60f;
+    private float expAmount;
     
     public Action<Enemy,float> OnDead;
     
@@ -42,6 +45,8 @@ public class Enemy : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         enemyAttack = GetComponent<EnemyAttack>();
         
+       
+        
         stateMachine = new EnemyStateMachine();
         idleState = new EnemyIdleState();
         moveState = new EnemyMoveState();
@@ -50,9 +55,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        hp.Init();
-        enemyMovement.Init();
-        enemyAttack.Init(target);
+        SetData(enemyData);
         
         idleState.Init(this,stateMachine);
         moveState.Init(this,stateMachine);
@@ -94,5 +97,12 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
-    
+
+    private void SetData(EnemyData data)
+    {
+        hp.Init(enemyData.maxHP);
+        enemyMovement.Init(enemyData.speed);
+        enemyAttack.Init(target,enemyData.damage,enemyData.attackRange,enemyData.cooldown,enemyData.projectile,enemyData.projectileSpeed);
+        expAmount = data.expAmount;
+    }
 }

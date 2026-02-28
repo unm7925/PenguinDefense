@@ -14,5 +14,6 @@
     public override void Exit()
     {
         enemy.EnemyAttack.StopAllCoroutines();
+        enemy.EnemyAttack.IsAttacking = false;
     }
 }
