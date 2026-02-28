@@ -9,7 +9,6 @@ public class StageResultUI:MonoBehaviour
 {
         [SerializeField] private StageManager stageManager;
         [SerializeField] private GameObject retryButton;
-        private bool isWin;
         
         private void Start()
         {
@@ -25,7 +24,7 @@ public class StageResultUI:MonoBehaviour
 
         private void PrintResultUI(bool _isWin)
         {
-                if(isWin) 
+                if(_isWin) 
                 {
                         gameObject.SetActive(true);
                         retryButton.SetActive(true);

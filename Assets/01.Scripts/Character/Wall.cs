@@ -16,8 +16,8 @@ public class Wall : MonoBehaviour
     private void Start()
     {
         hp.Init(maxHP);
-        
     }
+    
 
     private void OnEnable()
     {

@@ -10,6 +10,7 @@ public class EXPSystem : MonoBehaviour
     private int level;
     
     public Action OnLevelUp;
+    public Action<float,float> OnEXPChanged;
     
     public void Init()
     {
@@ -21,7 +22,7 @@ public class EXPSystem : MonoBehaviour
     public void AddEXP(float amount)
     {
         currentEXP += amount;
-
+        
         while(currentEXP >= requirEXP)
         {
             currentEXP -= requirEXP;
@@ -29,5 +30,6 @@ public class EXPSystem : MonoBehaviour
             requirEXP = baseEXP  * Mathf.Pow(EXPMul,level);
             OnLevelUp?.Invoke();
         }
+        OnEXPChanged?.Invoke(currentEXP,requirEXP);
     }
 }

@@ -10,6 +10,7 @@ public class HP:MonoBehaviour,IRecoverable
     private int maxHP;
 
     public event Action OnDeath;
+    public event Action<int,int> OnHPChanged;
     
     public void Init(int _maxHP)
     {
@@ -26,6 +27,7 @@ public class HP:MonoBehaviour,IRecoverable
     private void Heal(int _hp)
     {
         currentHP = Mathf.Min(currentHP + _hp, maxHP);
+        OnHPChanged?.Invoke(currentHP,maxHP);
     }
 
 
@@ -43,6 +45,7 @@ public class HP:MonoBehaviour,IRecoverable
             Die();
         }
         
+        OnHPChanged?.Invoke(currentHP,maxHP);
     }
 
     private void Die()

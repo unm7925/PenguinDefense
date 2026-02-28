@@ -14,6 +14,7 @@ public class StageManager:MonoBehaviour
     
     public event Action<bool> OnStageCleared;
     public event Action<bool> OnGameOver;
+    public event Action<int> OnStageChanged;
         
     private float waveDeley = 10f;
     
@@ -26,17 +27,20 @@ public class StageManager:MonoBehaviour
         
         waveDatas = GameManager.Instance.AllStages[_stageIndex].waves;
         waveIndex = 0;
-
+        
+        spawnController.OnEnemySpawn += OnEnemySpawn;
+        spawnController.OnSpawnComplete += HandleSpawnCompleted;
+        
         StartWave(waveIndex);
     }
 
     private void Start()
     {
         LoadStage(GameManager.Instance.CurrentStageIndex);
-        spawnController.OnEnemySpawn += OnEnemySpawn;
-        spawnController.OnSpawnComplete += HandleSpawnCompleted;
-
+        
         wall.OnWallDestroyed += GameOver;
+        
+        OnStageChanged?.Invoke(waveIndex+1);
     }
 
     private void StartWave(int _waveIndex)
@@ -76,7 +80,9 @@ public class StageManager:MonoBehaviour
         if (isStageCleared) return;
         
         waveIndex++;
-
+        
+        OnStageChanged?.Invoke(waveIndex+1);
+        
         if (waveIndex >= waveDatas.Count) return;
         
         StartNextWaveWithDeley();

@@ -25,11 +25,12 @@ public class Player : MonoBehaviour
     private void Start()
     {
         weaponContainer.AddWeapon(data);
+        expSystem.Init();
     }
 
     private void OnEnable()
     {
-        expSystem.Init();
+        
     }
 
 
