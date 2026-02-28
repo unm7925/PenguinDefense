@@ -7,10 +7,13 @@ public class StageManager:MonoBehaviour
 {
     [SerializeField] private SpawnController spawnController;
     [SerializeField] private EXPSystem expSystem;
+    [SerializeField] private Wall wall;
+    [SerializeField] private TargetSystem targetSystem;
     
     private List<WaveData> waveDatas; 
     
-    public event Action OnStageCleared;
+    public event Action<bool> OnStageCleared;
+    public event Action<bool> OnGameOver;
         
     private float waveDeley = 10f;
     
@@ -32,6 +35,8 @@ public class StageManager:MonoBehaviour
         LoadStage(GameManager.Instance.CurrentStageIndex);
         spawnController.OnEnemySpawn += OnEnemySpawn;
         spawnController.OnSpawnComplete += HandleSpawnCompleted;
+
+        wall.OnWallDestroyed += GameOver;
     }
 
     private void StartWave(int _waveIndex)
@@ -102,15 +107,30 @@ public class StageManager:MonoBehaviour
         
         Debug.Log("Clear");
         
-        StopAllCoroutines();
-        OnStageCleared?.Invoke();
+        MemoryDel();
+        OnStageCleared?.Invoke(true);
         
         // 스테이지 클리어 -> 이벤트 구독한 ui 다 튀어나오기 
+    }
+
+    void GameOver()
+    {
+
+        MemoryDel();
+        OnGameOver?.Invoke(false);
+    }
+
+    void MemoryDel()
+    {
+        Time.timeScale = 0;
+        targetSystem.AllClear();
+        StopAllCoroutines();
     }
 
     private void OnDestroy()
     {
         spawnController.OnEnemySpawn -= OnEnemySpawn;
         spawnController.OnSpawnComplete -= HandleSpawnCompleted;
+        wall.OnWallDestroyed -= GameOver;
     }
 }

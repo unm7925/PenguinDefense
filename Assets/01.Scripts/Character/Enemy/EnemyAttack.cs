@@ -32,7 +32,7 @@ public class EnemyAttack:MonoBehaviour
 
     private void Update()
     {
-        if (!IsAttacking) 
+        if (!IsAttacking && target != null) 
         {
             float distance = transform.position.y - target.position.y;
 

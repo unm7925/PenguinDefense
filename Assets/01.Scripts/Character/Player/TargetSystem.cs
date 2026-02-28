@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 public class TargetSystem:MonoBehaviour
 {
@@ -34,5 +35,15 @@ public class TargetSystem:MonoBehaviour
         }
 
         return closest;
+    }
+    
+    public void AllClear()
+    {
+        for (int i = targets.Count - 1; i >= 0; i--) 
+        {
+            Destroy(targets[i].gameObject);
+        }
+        
+        targets.Clear();
     }
 }

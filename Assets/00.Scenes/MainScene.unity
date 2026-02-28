@@ -1078,6 +1078,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   spawnController: {fileID: 404499003}
   expSystem: {fileID: 1367954461}
+  wall: {fileID: 1157326943}
+  targetSystem: {fileID: 1722251263}
 --- !u!4 &719777235
 Transform:
   m_ObjectHideFlags: 0
@@ -1828,7 +1830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f54cb5a7b153d142bf0bac8b06d40c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wall
-  maxHP: 1000
+  maxHP: 10
 --- !u!1 &1232624900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,6 +2185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageResultUI
   stageManager: {fileID: 719777234}
+  retryButton: {fileID: 102747955}
 --- !u!1 &1581275746
 GameObject:
   m_ObjectHideFlags: 0
