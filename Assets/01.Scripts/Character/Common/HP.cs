@@ -12,10 +12,10 @@ public class HP:MonoBehaviour,IRecoverable
     public event Action OnDeath;
     public event Action<int,int> OnHPChanged;
     
-    public void Init(int _maxHP)
+    public void Init(int _maxHP,float _hpMultiplier =1f)
     {
         //maxHP = 
-        maxHP = _maxHP;
+        maxHP = (int)(_maxHP * _hpMultiplier);
         currentHP = maxHP;
     }
 

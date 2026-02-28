@@ -11,14 +11,14 @@ public class EnemyMovement:MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>(); 
     }
 
-    public void Init(float _speed)
+    public void Init(float _speed,float _speedMultiplier =1)
     {
-        speed = -_speed;
+        speed = -(_speed * _speedMultiplier);
     }
 
     public void Move()
     {
-        rb2D.linearVelocityY = speed  * Time.fixedDeltaTime;
+        rb2D.linearVelocityY = speed  * Time.deltaTime;
     }
 
     public void Stop()

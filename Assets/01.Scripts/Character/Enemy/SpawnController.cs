@@ -40,7 +40,7 @@ public class SpawnController:MonoBehaviour
                                                 Quaternion.identity)
                                         .GetComponent<Enemy>();
 
-                                enemy.Init(t.isBoss,targetWall,targetSystem);
+                                enemy.Init(t.isBoss,targetWall,targetSystem,t.enemyHpMultiplier,t.enemySpeedMultiplier);
                                 
                                 targetSystem.Register(enemy);
                                 

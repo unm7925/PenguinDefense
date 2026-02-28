@@ -81,6 +81,11 @@ public class WeaponInstance
                 {
                         rb2.linearVelocity = direction.normalized * speed;        
                 }
+
+                foreach (var setup in weapon.GetComponents<IWeaponSetup>()) 
+                {
+                        setup.Init(data);
+                }
         }
         private GameObject SpawnProjectile(Vector2 _pos)
         {

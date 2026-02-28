@@ -23,6 +23,9 @@ public class Enemy : MonoBehaviour
     
     private float expAmount;
     
+    private float hpMultiplier;
+    private float speedMultiplier;
+    
     public Action<Enemy,float> OnDead;
     
     private HP hp;
@@ -32,11 +35,13 @@ public class Enemy : MonoBehaviour
 
     public EnemyAttack EnemyAttack => enemyAttack;
 
-    public void Init(bool _isBoss, Transform _transform, TargetSystem _targetSystem)
+    public void Init(bool _isBoss, Transform _transform, TargetSystem _targetSystem, float _hpMul, float _speedMul)
     {
         IsBoss = _isBoss;
         target = _transform;
         targetSystem = _targetSystem;
+        hpMultiplier = _hpMul;
+        speedMultiplier = _speedMul;
     }
 
     protected void Awake()
@@ -100,9 +105,9 @@ public class Enemy : MonoBehaviour
 
     private void SetData(EnemyData data)
     {
-        hp.Init(enemyData.maxHP);
-        enemyMovement.Init(enemyData.speed);
-        enemyAttack.Init(target,enemyData.damage,enemyData.attackRange,enemyData.cooldown,enemyData.projectile,enemyData.projectileSpeed);
+        hp.Init(data.maxHP,hpMultiplier);
+        enemyMovement.Init(data.speed,speedMultiplier);
+        enemyAttack.Init(target,data.damage,data.attackRange,data.cooldown,data.projectile,data.projectileSpeed);
         expAmount = data.expAmount;
     }
 }

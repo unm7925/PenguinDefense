@@ -16,6 +16,6 @@ MonoBehaviour:
   - isBoss: 1
     prefab: {fileID: 8031582740323571236, guid: 44002d2d3df05cf4aafdfad743ee6d60, type: 3}
     count: 1
-    spawnInterval: 0
-    enemyHpMultiplier: 0
-    enemySpeedMultiplier: 0
+    spawnInterval: 1
+    enemyHpMultiplier: 1
+    enemySpeedMultiplier: 1

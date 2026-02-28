@@ -1,10 +1,14 @@
 ﻿
+    using System;
     using UnityEngine;
     public class Projectile:MonoBehaviour
     {
         
         private int damage;
         private string targetTag;
+        private IWeaponSetup[] modules;
+        
+        public event Action OnHit;
         
         public void Init(int _damage, float _lifetime, string _tag)
         {
@@ -14,16 +18,30 @@
             Destroy(gameObject, _lifetime);
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void Start()
         {
-            if (collision.CompareTag(targetTag)) 
+            modules = GetComponents<IWeaponSetup>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag(targetTag)) 
             {
-                HP hp = collision.GetComponent<HP>();
+                HP hp = other.GetComponent<HP>();
+                
+                hp.TakeDamage(damage);
+                
                 if (hp != null) 
                 {
-                    hp.TakeDamage(damage);
-                    Debug.Log(targetTag + damage);
-                    Destroy(gameObject);
+                    if (modules.Length > 0) 
+                    {
+                        OnHit?.Invoke();                        
+                    }
+                    else 
+                    {
+                        Destroy(gameObject);    
+                    }
+                    
                 }
             }
         }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7faa6cbf6304f2ca453dec05ee91330, type: 3}
+  m_Name: Charged_Data
+  m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
+  weaponPrefab: {fileID: 5644435535942261803, guid: 642eba917166c3741b939ed8d43a5c46, type: 3}
+  waeponName: 
+  damage: 50
+  searchRange: 50
+  baseCooldown: 15
+  projectile:
+    speed: 20
+    lifetime: 5
+    count: 1
+    spreadAngle: 1
+  bounce:
+    bounceCount: 0
+  pierce:
+    pierceCount: 0
+  aoe:
+    radius: 360
