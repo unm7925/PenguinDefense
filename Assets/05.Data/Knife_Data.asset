@@ -19,9 +19,9 @@ MonoBehaviour:
   baseCooldown: 1
   projectile:
     speed: 30
-    lifetime: 100
-    count: 0
-    spreadAngle: 0
+    lifetime: 5
+    count: 1
+    spreadAngle: 30
   bounce:
     bounceCount: 0
   pierce:

@@ -15,13 +15,14 @@ public class EnemyMovement:MonoBehaviour
     { 
 
     }
-    
-    private void FixedUpdate()
-    {
-        Move();
-    }
-    private void Move()
+
+    public void Move()
     {
         rb2D.linearVelocityY = -speed  * Time.fixedDeltaTime;
+    }
+
+    public void Stop()
+    {
+        rb2D.linearVelocityY = 0;
     }
 }

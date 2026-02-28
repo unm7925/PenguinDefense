@@ -8,6 +8,7 @@ public class SpawnController:MonoBehaviour
 {
         [SerializeField] private float cooldown = 3f;
         [SerializeField] private TargetSystem targetSystem;
+        [SerializeField] private Transform targetWall;
         
         public event Action<Enemy> OnEnemySpawn;
         public event Action OnSpawnComplete;
@@ -38,10 +39,8 @@ public class SpawnController:MonoBehaviour
                                 Enemy enemy = Instantiate(t.prefab, pos,
                                                 Quaternion.identity)
                                         .GetComponent<Enemy>();
-                                
-                                enemy.Init(t.isBoss);
 
-                                enemy.SetTargetSystem(targetSystem);
+                                enemy.Init(t.isBoss,targetWall,targetSystem);
                                 
                                 targetSystem.Register(enemy);
                                 
@@ -59,7 +58,5 @@ public class SpawnController:MonoBehaviour
                 Vector2 pos = new Vector2(Random.Range(-spawnSize.x,spawnSize.x),spawnSize.y);
                 return pos;
         }
-        
-        
         
 }
