@@ -9,10 +9,10 @@ public class BounceProjectile:MonoBehaviour,IWeaponSetup
 
     private Vector2 lastVelocity;
     
-    public void Init(BaseWeaponData data)
+    public void Init(WeaponInstance weaponInstance)
     {
-        bounceAmount = data.bounce.bounceCount;
-        speed = data.projectile.speed;
+        bounceAmount = weaponInstance.BounceCount;
+        speed = weaponInstance.Speed;
     }
 
     public void OnHit()
@@ -33,7 +33,7 @@ public class BounceProjectile:MonoBehaviour,IWeaponSetup
         rb2d.linearVelocity = direction * speed;
         bounceAmount--;
 
-        if (bounceAmount <= 0) 
+        if (bounceAmount < 0) 
         {
             Destroy(gameObject);
         }

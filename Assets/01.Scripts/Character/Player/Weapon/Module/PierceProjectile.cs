@@ -4,9 +4,9 @@ public class PierceProjectile:MonoBehaviour,IWeaponSetup
 {
     private Projectile projectile;
     private int pierceAmount;
-    public void Init(BaseWeaponData data)
+    public void Init(WeaponInstance weaponInstance)
     {
-        pierceAmount = data.pierce.pierceCount;
+        pierceAmount = weaponInstance.PierceCount;
     }
 
     public void OnHit()

@@ -12,8 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7faa6cbf6304f2ca453dec05ee91330, type: 3}
   m_Name: Knife_Data
   m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
+  upgradeOptions:
+  - type: 1
+    value: 0.5
+    description: "\uACF5\uACA9 \uC18D\uB3C4 \uC99D\uAC00"
+  - type: 0
+    value: 10
+    description: "\uB370\uBBF8\uC9C0 \uC99D\uAC00"
+  - type: 3
+    value: 1
+    description: "\uD22C\uC0AC\uCCB4 \uC99D\uAC00"
+  - type: 3
+    value: 1
+    description: "\uD22C\uC0AC\uCCB4 \uC99D\uAC00"
+  - type: 0
+    value: 10
+    description: "\uB370\uBBF8\uC9C0 \uC99D\uAC00"
+  - type: 3
+    value: 1
+    description: "\uD22C\uC0AC\uCCB4 \uC99D\uAC00"
+  - type: 0
+    value: 30
+    description: "\uB370\uBBF8\uC9C0 \uC99D\uAC00"
   weaponPrefab: {fileID: 8971791327109278964, guid: cabfd048f35c2404d90dd450547b6486, type: 3}
-  waeponName: knife
+  waeponName: "\uB2E8\uAC80"
   damage: 30
   searchRange: 100
   baseCooldown: 1

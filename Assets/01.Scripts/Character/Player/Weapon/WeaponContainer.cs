@@ -5,21 +5,15 @@ public class WeaponContainer : MonoBehaviour
     private List<WeaponInstance> ownedWeapons = new List<WeaponInstance>();
     [SerializeField] private TargetSystem targetSystem;
     [SerializeField] private Transform playerTransform;
+    
+    public List<WeaponInstance> OwnedWeapons => ownedWeapons;
 
     public void AddWeapon(BaseWeaponData data)
     {
         // 이미 가진 무기인지 확인
-        WeaponInstance existing = GetWeapon(data);
-        if (existing != null) 
-        {
-            LevelUpWeapon(data);
-        }
-        else
-        {
-            // WeaponInstance는 MonoBehaviour 아님, 그냥 데이터 객체
-            WeaponInstance newWeapon = new WeaponInstance(data);
-            ownedWeapons.Add(newWeapon);
-        }
+
+        WeaponInstance newWeapon = new WeaponInstance(data);
+        ownedWeapons.Add(newWeapon);
     }
 
     private void Update()
@@ -31,17 +25,17 @@ public class WeaponContainer : MonoBehaviour
         }
     }
     
-    private void LevelUpWeapon(BaseWeaponData _data)
+    public void UpgradeWeapon(BaseWeaponData _data)
     {
         WeaponInstance weapon = GetWeapon(_data);
 
         if (weapon != null)
         {
-            weapon.LevelUp();
+            weapon.ApplyUpgrade();
         }
     }
 
-    private WeaponInstance GetWeapon(BaseWeaponData _data)
+    public WeaponInstance GetWeapon(BaseWeaponData _data)
     {
         foreach (var weapon in ownedWeapons)
         {
@@ -53,17 +47,40 @@ public class WeaponContainer : MonoBehaviour
 
         return null;
     }
+
+    public List<WeaponInstance> GetUpgradeableWeapons()
+    {
+        List<WeaponInstance> upradeableWeapons = new List<WeaponInstance>();
+        foreach (var weapon in ownedWeapons) 
+        {
+            if (!weapon.IsMaxLevel()) 
+            {
+                upradeableWeapons.Add(weapon);
+            }
+        }
+
+        return upradeableWeapons;
+
+    }
     
     /*
         private void RemoveWeapon(BaseWeaponData _data)
         {
 
         }
+*/
 
-
-         private bool HasWeapon(BaseWeaponData _data)
+        public bool HasWeapon(BaseWeaponData _data)
         {
+            foreach (var weapon in ownedWeapons)
+            {
+                if (weapon.GetWeaponData() == _data)
+                {
+                    return true;
+                }
+            }
 
+            return false;
         }
-        */
+        
 }

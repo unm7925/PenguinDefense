@@ -29,10 +29,10 @@
             {
                 HP hp = other.GetComponent<HP>();
                 
-                hp.TakeDamage(damage);
-                
                 if (hp != null) 
                 {
+                    hp.TakeDamage(damage);
+
                     if (modules.Length > 0) 
                     {
                         OnHit?.Invoke();                        

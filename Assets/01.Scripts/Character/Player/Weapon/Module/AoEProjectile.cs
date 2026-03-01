@@ -7,10 +7,10 @@ public class AoEProjectile : MonoBehaviour, IWeaponSetup
     private float radious;
     private int damage;
     
-    public void Init(BaseWeaponData data)
+    public void Init(WeaponInstance weaponInstance)
     {
-        radious = data.aoe.radius;
-        damage = data.damage;
+        radious = weaponInstance.AOERadius;
+        damage = weaponInstance.Damage;
     }
     public void OnHit()
     {

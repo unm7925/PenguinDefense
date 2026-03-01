@@ -12,11 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7faa6cbf6304f2ca453dec05ee91330, type: 3}
   m_Name: Charged_Data
   m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
+  upgradeOptions:
+  - type: 0
+    value: 10
+    description: "\uACF5\uACA9\uB825 \uC99D\uAC00"
+  - type: 3
+    value: 1
+    description: "\uD22C\uC0AC\uCCB4 \uC99D\uAC00"
+  - type: 0
+    value: 10
+    description: "\uACF5\uACA9\uB825 10 \uC99D\uAC00"
+  - type: 1
+    value: 1
+    description: "\uACF5\uACA9 \uC18D\uB3C4 \uC99D\uAC00"
+  - type: 0
+    value: 10
+    description: "\uACF5\uACA9\uB825 10 \uC99D\uAC00"
+  - type: 3
+    value: 1
+    description: "\uD22C\uC0AC\uCCB4 \uC99D\uAC00"
+  - type: 6
+    value: 10
+    description: "\uBC94\uC704 \uC99D\uAC00"
   weaponPrefab: {fileID: 5644435535942261803, guid: 642eba917166c3741b939ed8d43a5c46, type: 3}
-  waeponName: 
+  waeponName: "\uBC94\uC704 \uACF5\uACA9"
   damage: 50
   searchRange: 50
-  baseCooldown: 15
+  baseCooldown: 3
   projectile:
     speed: 20
     lifetime: 5
@@ -27,4 +49,4 @@ MonoBehaviour:
   pierce:
     pierceCount: 0
   aoe:
-    radius: 360
+    radius: 0

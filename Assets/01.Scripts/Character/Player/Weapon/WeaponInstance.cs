@@ -1,14 +1,32 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 public class WeaponInstance
 {
         private BaseWeaponData data;
         private float cooldownTimer;
-        private int level;
+        
         private int count;
-        int maxLevel = 6;
         private float speed;
         private float spreadAngle;
+        private float cooldown;
+        private int damage;
+        private float lifetime;
+
+        private int bounceCount;
+        private int pierceCount;
+        private int aoeRadius;
         
+        public int BounceCount => bounceCount;
+        public int PierceCount => pierceCount;
+        public int AOERadius => aoeRadius;
+        public int Damage => damage;
+        public float Speed => speed;
+        
+        Dictionary<UpgradeType, Action<float>> upgradeActions;
+        
+        private int level;
+        int maxLevel = 6;
         // hard
         private string targetTag = "Enemy";
 
@@ -16,16 +34,44 @@ public class WeaponInstance
         {
                 data = _data;
                 cooldownTimer = 0;
-                level = 1;
+                level = 0;
+
+                damage = _data.damage;
                 count = _data.projectile.count;
                 speed = _data.projectile.speed;
                 spreadAngle = _data.projectile.spreadAngle;
+                lifetime = _data.projectile.lifetime;
+                cooldown = _data.baseCooldown;
+
+                if(_data.bounce !=null) 
+                {
+                        bounceCount = _data.bounce.bounceCount;
+                }
+                if(_data.pierce !=null) 
+                {
+                        pierceCount = _data.pierce.pierceCount;
+                }
+                if(_data.aoe !=null) 
+                {
+                        aoeRadius = _data.aoe.radius;
+                }
+
+                upgradeActions = new Dictionary<UpgradeType, Action<float>>
+                {
+                        { UpgradeType.Damage, v => damage += (int)v },
+                        { UpgradeType.Cooldown, v => cooldown -= v },
+                        { UpgradeType.ProjectileSpeed, v => speed += v },
+                        { UpgradeType.ProjectileCount, v => count += (int)v },
+                        { UpgradeType.PierceCount, v => pierceCount += (int)v },
+                        { UpgradeType.BounceCount, v => bounceCount += (int)v },
+                        { UpgradeType.AoERadius, v => aoeRadius += (int)v },
+                };
         }
 
         public void Tick(float _deltaTime,Transform _playerTransform, TargetSystem _targetSystem)
         {
                 cooldownTimer += _deltaTime;
-                if (cooldownTimer >= data.baseCooldown) 
+                if (cooldownTimer >= cooldown) 
                 {
                         Attack(_playerTransform, _targetSystem);
                         cooldownTimer = 0;
@@ -73,7 +119,7 @@ public class WeaponInstance
                 Projectile projectile = weapon.GetComponent<Projectile>();
                 if (projectile != null)
                 { 
-                        projectile.Init(data.damage, data.projectile.lifetime,targetTag);
+                        projectile.Init(damage, lifetime,targetTag);
                 }
                 
                 Rigidbody2D rb2 = weapon.GetComponent<Rigidbody2D>();
@@ -84,7 +130,7 @@ public class WeaponInstance
 
                 foreach (var setup in weapon.GetComponents<IWeaponSetup>()) 
                 {
-                        setup.Init(data);
+                        setup.Init(this);
                 }
         }
         private GameObject SpawnProjectile(Vector2 _pos)
@@ -95,20 +141,12 @@ public class WeaponInstance
         {
                 return target.transform.position - playerTransform.position;
         }
+        
 
-        public void LevelUp()
-        {
-                if (IsMaxLevel()) return;
-                level++;
-                count++;
-                // 스탯 아직 생각한 테이블 없음.
-                cooldownTimer = 0;
-        }
-
-        private bool IsMaxLevel()
+        public bool IsMaxLevel()
         {
                 
-                if (level >= maxLevel) 
+                if (level >= data.upgradeOptions.Count) 
                 {
                         return true;
                 }
@@ -118,4 +156,18 @@ public class WeaponInstance
         {
                 return data;
         }
+
+        public void ApplyUpgrade()
+        {
+                if (upgradeActions.TryGetValue(data.upgradeOptions[level].type, out var action)) 
+                {
+                        action(data.upgradeOptions[level].value);
+                }
+        }
+
+        public UpgradeOption GetNextUpgrade()
+        {
+                return data.upgradeOptions[level];
+        }
+        
 }

@@ -1,6 +1,6 @@
 ﻿public interface IWeaponSetup
 {
-    public void Init(BaseWeaponData data);
+    public void Init(WeaponInstance weaponInstance);
     public void OnHit();
 }
 

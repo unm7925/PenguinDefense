@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,47 +8,76 @@ public class LevelUpPanel:MonoBehaviour
     [SerializeField] private WeaponContainer weaponContainer;
     [SerializeField] private AllWeaponData allWeaponData;
     [SerializeField] private GameObject panel;
-    [SerializeField] private Button slot1, slot2;
-    [SerializeField] private TextMeshProUGUI slot1Txt , slot2Txt;
-
-    private BaseWeaponData[] selectedWeapons = new BaseWeaponData[2];
+    [SerializeField] private Button[] slots;
+    [SerializeField] private TextMeshProUGUI[] slotsName;
+    [SerializeField] private TextMeshProUGUI[] slots_descriptions;
+    
+    List<CardOption> pool = new List<CardOption>();
         
         public void Show()
         {
             Time.timeScale = 0f;
-                panel.SetActive(true);
-                GetRandomWeapons();
-                slot1Txt.text = selectedWeapons[0].name;
-                slot2Txt.text = selectedWeapons[1].name;
-                
-                slot1.onClick.RemoveAllListeners();
-                slot2.onClick.RemoveAllListeners();
-                slot1.onClick.AddListener(() => OnSelectWeapon(0));
-                slot2.onClick.AddListener(()=> OnSelectWeapon(1));
+            panel.SetActive(true);
+            
+            GetRandomWeapons();
+
+            SetSlots();
+
+        }
+
+        private void SetSlots()
+        {
+            for (int i = 0; i < Mathf.Min(pool.Count, slots.Length); i++) {
+                int index = i;
+                slots[i].onClick.RemoveAllListeners();
+                slots[i].onClick.AddListener(() => OnSelectWeapon(index));
+                slotsName[i].text = pool[i].name;
+                slots_descriptions[i].text = pool[i].description;
+            }
         }
         private void OnSelectWeapon(int _index)
         {
-            weaponContainer.AddWeapon(selectedWeapons[_index]);
+            pool[_index].onSelect?.Invoke();
             Hide();
         }
         private void GetRandomWeapons()
         {
-            List<BaseWeaponData> temp = new List<BaseWeaponData>(allWeaponData.allWeapons);
-
-            for (int i = temp.Count - 1; i >= 0; i--) 
+            foreach (var weaponData in allWeaponData.allWeapons) 
             {
-                int j = Random.Range(0, i+1);
-                (temp[i], temp[j]) = (temp[j], temp[i]);
+                if (!weaponContainer.HasWeapon(weaponData)) 
+                {
+                    pool.Add(new CardOption
+                    {
+                        name = weaponData.waeponName,
+                        description = "무기 획득",
+                        onSelect = () => weaponContainer.AddWeapon(weaponData)
+                    });
+                }
+            }
+
+            foreach (var instance in weaponContainer.GetUpgradeableWeapons())
+            {
+                pool.Add(new CardOption
+                {
+                    name = instance.GetWeaponData().waeponName,
+                    description = instance.GetNextUpgrade().description,
+                    onSelect = () => weaponContainer.UpgradeWeapon(instance.GetWeaponData())
+                });
             }
             
-            selectedWeapons[0] = temp[0];
-            selectedWeapons[1] = temp[1];
+            
+            for (int i = pool.Count - 1; i >= 0; i--) 
+            {
+                int j = Random.Range(0, i+1);
+                (pool[i], pool[j]) = (pool[j], pool[i]);
+            }
         }
 
         private void Hide()
         {
             Time.timeScale = 1f;
+            pool.Clear();
             panel.SetActive(false);
         }
-    
+
 }
